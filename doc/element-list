@@ -1,0 +1,7 @@
+com.accenture.fers.dao
+com.accenture.fers.entity
+com.accenture.fers.exceptions
+com.accenture.fers.service
+com.accenture.fers.test.entity
+com.accenture.fers.test.visitor
+com.accenture.fers.utils
