@@ -27,17 +27,19 @@
 				href="./updateVisitorInformation.jsp">Update visitor</a> <a
 				href="./changePassword.do">Update password</a> <br>Username: <span
 				id="username"> <%
-						out.println(request.getSession().getAttribute("username"));
+ 	out.println(request.getSession().getAttribute("username"));
  %>
-			</span> <br>Vistor ID: <span id="visitorid"></span> <br>Email: <span
-				id="email"> <%
-						out.println(request.getSession().getAttribute("email"));
+			</span> <br>Vistor ID: <span id="visitorid"> <%
+ 	out.println(request.getSession().getAttribute("visitorid"));
+ %>
+			</span> <br>Email: <span id="email"> <%
+ 	out.println(request.getSession().getAttribute("email"));
  %>
 			</span> <br>Phone Number: <span id="phonenumber"> <%
-					out.println(request.getSession().getAttribute("phoneNumber"));
+ 	out.println(request.getSession().getAttribute("phonenumber"));
  %>
 			</span> <br>Address: <span id="address"> <%
-					out.println(request.getSession().getAttribute("address"));
+ 	out.println(request.getSession().getAttribute("address"));
  %>
 			</span>
 		</div>
@@ -58,7 +60,19 @@
 						<th>Event type</th>
 						<th>Action</th>
 					</tr>
-
+					<c:forEach var="registeredevents"
+						items="${sessionScope.visitor.registeredEvents}">
+						<tr>
+							<th>${registeredevents.eventId}</th>
+							<th>${registeredevents.name}</th>
+							<th>${registeredevents.description}</th>
+							<th>${registeredevents.place}</th>
+							<th>${registeredevents.duration}</th>
+							<th>${registeredevents.eventType}</th>
+							<th><a
+								href="eventUnreg.do?idEvento=${registeredevents.eventId}">Unregister</th>
+						</tr>
+					</c:forEach>
 				</table>
 			</form>
 		</div>
@@ -81,7 +95,17 @@
 						<th>Available Tickets</th>
 						<th>Action</th>
 					</tr>
-					
+					<c:forEach var="allEvents" items="${aplicationScope.lista_Eventos}">
+						<tr>
+							<th>${allEvents.eventId}</th>
+							<th>${allEvents.name}</th>
+							<th>${allEvents.description}</th>
+							<th>${allEvents.place}</th>
+							<th>${allEvents.duration}</th>
+							<th>${allEvents.eventType}</th>
+							<th><a href="eventReg.do?idEvento=${allEvents.eventId}">Register</th>
+						</tr>
+					</c:forEach>
 				</table>
 			</form>
 		</div>

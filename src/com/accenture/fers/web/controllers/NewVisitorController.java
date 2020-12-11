@@ -10,7 +10,7 @@ public class NewVisitorController implements IController {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String view = "WEB-INF/portal.jsp";
+		String view = "/index.jsp";
 		try {
 			// Recuperar los parametros de la request
 			String firstname = request.getParameter("firstname");

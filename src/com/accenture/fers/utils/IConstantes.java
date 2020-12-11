@@ -43,5 +43,6 @@ public interface IConstantes {
 	public static final String ERM_021 = "Invalid Event Duration";
 	public static final String ERM_022 = "Invalid Event Type";
 	public static final String ERM_023 = "Invalid Seats Available";
+	public static final Object ERM_024 = "Invalid Username/Password";
 
 }

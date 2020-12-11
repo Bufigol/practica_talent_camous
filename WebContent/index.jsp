@@ -43,6 +43,7 @@
 					<th></th>
 				</tr>
 			</table>
+			<div>${requestscope.error}</div>
 		</form>
 	</div>
 </body>
