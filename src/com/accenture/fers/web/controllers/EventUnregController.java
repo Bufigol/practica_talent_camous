@@ -1,64 +1,57 @@
 package com.accenture.fers.web.controllers;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.accenture.fers.dao.VisitorDAO;
+import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
+import com.accenture.fers.service.EventFacade;
+import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 public class EventUnregController implements IController {
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		process(request, response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		process(request, response);
-	}
+	VisitorFacade servicio = new VisitorService();
+	EventFacade eventService = new EventService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		String view = "/WEB-INF/portal.jsp";
 		try {
 			// Recuperar los parametros de la request
-			String usuario = request.getParameter("visitorname");
-			String event = request.getParameter("eventID");
+
+			String event = request.getParameter("idEvento");
 			int eventID = Integer.parseInt(event);
-			VisitorDAO visitDAO = new VisitorDAO();
+			HttpSession sesion = request.getSession();
+			Visitor usuario = (Visitor) sesion.getAttribute("visitor");
 
 			// Crear una instancia del objeto Visitor
-			Visitor visitor = visitDAO.findByUserName(usuario);
 
 			// Crear la instancia del VisitorService
-			VisitorFacade servicio = new VisitorService();
-			servicio.registerVisitorToEvent(visitor, eventID);
-			servicio.unregisterVisitorToEvent(visitor, eventID);
+			servicio.unregisterVisitorToEvent(usuario, eventID);
 
 			// llamamos al servico para recuperar los datos del visitante
 
-			visitor = servicio.searchUser(visitor);
+			usuario = servicio.searchUser(usuario);
+			sesion.setAttribute("visitor", usuario);
+			Set<Event> listaEventos = new HashSet<Event>();
+
+			// Relleno la lista usando el servicio
+			listaEventos = eventService.getAllEvents();
+			request.getServletContext().setAttribute("lista_Eventos", listaEventos);
 
 		} catch (Exception error) {
 			// Guardo en la request el mensaje de error
 			request.setAttribute("error", error.getMessage());
 		}
-
 		return view;
 	}
 
