@@ -3,6 +3,8 @@ package com.accenture.fers.dao;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.accenture.fers.entity.Event;
 
 /**
@@ -13,6 +15,7 @@ import com.accenture.fers.entity.Event;
 *
 * @version 1.0
 */
+@Repository
 public class EventDAO implements IEventDAO{
 
 	private static Set<Event> events;

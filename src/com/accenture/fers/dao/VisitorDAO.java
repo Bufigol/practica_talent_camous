@@ -3,18 +3,21 @@ package com.accenture.fers.dao;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.accenture.fers.entity.Visitor;
 
 /**
-*
-* VisitortDAO
-*
-* @author Tecnilógica
-*
-* @version 1.0
-* 
-*/
-public class VisitorDAO implements IVisitorDAO{
+ *
+ * VisitortDAO
+ *
+ * @author Tecnilógica
+ *
+ * @version 1.0
+ * 
+ */
+@Repository
+public class VisitorDAO implements IVisitorDAO {
 
 	private static Set<Visitor> visitors = new HashSet<Visitor>();
 	private static int lastID = 4;
@@ -42,7 +45,7 @@ public class VisitorDAO implements IVisitorDAO{
 		visitor2.setPhoneNumber("+1122334455");
 		visitor2.setAddress("La Finca 1 Edificio 2");
 		visitors.add(visitor2);
-		
+
 		Visitor visitor3 = new Visitor();
 		visitor3.setVisitorId(3);
 		visitor3.setUserName("alozano");
@@ -54,7 +57,7 @@ public class VisitorDAO implements IVisitorDAO{
 		visitor3.setPhoneNumber("+112233445566");
 		visitor3.setAddress("La Finca 1 Edificio 2");
 		visitors.add(visitor3);
-		
+
 		Visitor visitor4 = new Visitor();
 		visitor4.setVisitorId(4);
 		visitor4.setUserName("rmartin");
@@ -77,7 +80,7 @@ public class VisitorDAO implements IVisitorDAO{
 	 *
 	 * @param Visitor
 	 * 
-	 * */
+	 */
 	public void save(Visitor visitor) {
 		lastID++;
 		visitor.setVisitorId(lastID);
@@ -95,7 +98,7 @@ public class VisitorDAO implements IVisitorDAO{
 	public int updateVisitor(Visitor visitor) {
 		int update = 0;
 		for (Visitor visitor2 : visitors) {
-			if (visitor2.getVisitorId() == visitor.getVisitorId()){
+			if (visitor2.getVisitorId() == visitor.getVisitorId()) {
 				visitor2.setAddress(visitor.getAddress());
 				visitor2.setEmail(visitor.getEmail());
 				visitor2.setFirstName(visitor.getFirstName());
@@ -113,6 +116,7 @@ public class VisitorDAO implements IVisitorDAO{
 	/**
 	 * 
 	 * Busca un Visitor por userName
+	 * 
 	 * @param userName
 	 * @return Visitor
 	 *
@@ -120,7 +124,7 @@ public class VisitorDAO implements IVisitorDAO{
 	public Visitor findByUserName(String userName) {
 		Visitor visitorFound = null;
 		for (Visitor visitorF : visitors) {
-			if (visitorF.getUserName().equals(userName)){
+			if (visitorF.getUserName().equals(userName)) {
 				visitorFound = visitorF;
 			}
 		}

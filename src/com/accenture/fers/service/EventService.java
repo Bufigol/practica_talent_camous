@@ -2,6 +2,8 @@ package com.accenture.fers.service;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.accenture.fers.dao.EventDAO;
 import com.accenture.fers.dao.IEventDAO;
 import com.accenture.fers.entity.Event;
@@ -15,6 +17,7 @@ import com.accenture.fers.entity.Event;
 * @version 1.1
 *
 */
+@Service("eventService")
 public class EventService implements EventFacade{
 
 	IEventDAO eventDAO = new EventDAO();

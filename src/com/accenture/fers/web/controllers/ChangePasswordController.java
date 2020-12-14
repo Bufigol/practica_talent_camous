@@ -3,10 +3,13 @@ package com.accenture.fers.web.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
+@Controller
 public class ChangePasswordController implements IController {
 	VisitorFacade servicio = new VisitorService();
 
@@ -34,12 +37,11 @@ public class ChangePasswordController implements IController {
 			// obtengo la nueva password y la actualizamos
 			String newPasword = request.getParameter("newPassword");
 			visitor.setPassword(newPasword);
-			
-			if(servicio.changePassword(visitor) == 1) {
+
+			if (servicio.changePassword(visitor) == 1) {
 				request.getSession().invalidate();
-				 view = "/index.jsp";
+				view = "/index.jsp";
 			}
-			
 
 		} catch (Exception error) {
 			// Guardo en la request el mensaje de error

@@ -2,6 +2,8 @@ package com.accenture.fers.service;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.accenture.fers.dao.EventDAO;
 import com.accenture.fers.dao.IEventDAO;
 import com.accenture.fers.dao.IVisitorDAO;
@@ -18,6 +20,7 @@ import com.accenture.fers.exceptions.FERSGenericException;
  *
  * @version 1.0
  */
+@Service("visitorService")
 public class VisitorService implements VisitorFacade {
 
 	private IVisitorDAO visitorDAO = new VisitorDAO();
@@ -34,10 +37,10 @@ public class VisitorService implements VisitorFacade {
 	 */
 	public boolean createVisitor(Visitor visitor) {
 		boolean flag = false;
-		
+
 		// si el username está disponible y es correcto se crea el visitor
 		String username = visitor.getUserName();
-		
+
 		if (visitorDAO.findByUserName(username) == null) {
 			visitorDAO.save(visitor);
 			flag = true;
@@ -47,9 +50,8 @@ public class VisitorService implements VisitorFacade {
 
 	/**
 	 * 
-	 * Servicio que devuelve un Visitor completo
-	 * si el visitor que se le pasa se corresponde
-	 * con un userName ya registrado
+	 * Servicio que devuelve un Visitor completo si el visitor que se le pasa se
+	 * corresponde con un userName ya registrado
 	 *
 	 * @param visitor (username)
 	 * @return visitor encontrado o null si no lo encuentra
@@ -70,9 +72,8 @@ public class VisitorService implements VisitorFacade {
 	}
 
 	/**
-	 * Servicio que registra un visitor a un evento
-	 * Este método reduce en uno el número de asientos
-	 * disponibles del evento
+	 * Servicio que registra un visitor a un evento Este método reduce en uno el
+	 * número de asientos disponibles del evento
 	 * 
 	 * @param visitor
 	 * @param eventId
@@ -102,7 +103,7 @@ public class VisitorService implements VisitorFacade {
 				visitor.getRegisteredEvents().add(event);
 				visitorDAO.updateVisitor(visitor);
 
-				//actualiza los asientos del evento
+				// actualiza los asientos del evento
 				eventDAO.save(event);
 			} else {
 				// Lanza la excepción con un mensaje personalizado
@@ -132,7 +133,7 @@ public class VisitorService implements VisitorFacade {
 	 * Servicio que actualiza la info de un visitor
 	 * 
 	 * @param visitor
-	 * @return  int --> 1 si se actualizó correctamente, 0 si no
+	 * @return int --> 1 si se actualizó correctamente, 0 si no
 	 * 
 	 */
 	public int updateVisitorDetails(Visitor visitor) {
@@ -155,9 +156,8 @@ public class VisitorService implements VisitorFacade {
 
 	/**
 	 * 
-	 * Servicio que elimina el registro de un visitor a un evento
-	 * Este método incrementa en uno el número de asientos
-	 * disponibles del evento
+	 * Servicio que elimina el registro de un visitor a un evento Este método
+	 * incrementa en uno el número de asientos disponibles del evento
 	 * 
 	 * @param visitor
 	 * @param eventId
@@ -178,8 +178,8 @@ public class VisitorService implements VisitorFacade {
 				}
 			}
 		}
-		//si el visitor está registrado elimina su registro
-		if(registrado){
+		// si el visitor está registrado elimina su registro
+		if (registrado) {
 			visitor.getRegisteredEvents().remove(event);
 
 			visitorDAO.updateVisitor(visitor);
@@ -194,6 +194,7 @@ public class VisitorService implements VisitorFacade {
 	/**
 	 * 
 	 * Servicio que chequea si un username está disponible para usarse
+	 * 
 	 * @param String username
 	 * @return boolean
 	 * 

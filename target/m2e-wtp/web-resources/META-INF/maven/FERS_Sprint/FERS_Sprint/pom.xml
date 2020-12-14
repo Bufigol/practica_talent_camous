@@ -1,7 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 	<groupId>FERS_Sprint</groupId>
 	<artifactId>FERS_Sprint</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -126,8 +124,8 @@
 			</resource>
 		</resources>
 		<sourceDirectory>src</sourceDirectory>
-		<!-- Plugins creados con jba 6.0 -->
-		<plugins>
+	    <!-- Plugins creados con jba 6.0 -->
+	    <plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
