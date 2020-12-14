@@ -25,10 +25,10 @@
 
 		<div class="userInformation">
 			Your personal information is below. To change your information <a
-				href="./updateVisitorInformation.jsp">Update visitor</a> <a
-				href="./changePassword.do">Update password</a> <br>Username: <span
-				id="username"> ${visitor.userName} </span> <br>Vistor ID: <span
-				id="visitorid"> ${visitor.visitorId}</span> <br>Email: <span
+				href="./updateVisitor.do">Update visitor</a> <a
+				href="./changePassword.do">Update password</a> <br>Username:
+			<span id="username"> ${visitor.userName} </span> <br>Vistor ID:
+			<span id="visitorid"> ${visitor.visitorId}</span> <br>Email: <span
 				id="email"> ${visitor.email}</span> <br>Phone Number: <span
 				id="phonenumber">${visitor.phoneNumber} </span> <br>Address: <span
 				id="address"> ${visitor.address}</span>

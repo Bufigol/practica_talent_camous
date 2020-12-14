@@ -8,15 +8,18 @@ import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 public class UpdateVisitorController implements IController {
+	VisitorFacade servicio = new VisitorService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		// Creamos la variable de retorno
-		String view = "portal.jsp";
+		String view = "WEB-INF/updateVisitorInformation.jsp";
 
 		try {
 			Visitor visitor = new Visitor();
 			// Recuperar los parametros de la request
+			visitor.setUserName(request.getParameter("userName"));
+			visitor = servicio.searchUser(visitor);
 			String firstname = request.getParameter("firstname");
 			visitor.setFirstName(firstname);
 			String lastname = request.getParameter("lastname");
@@ -31,12 +34,17 @@ public class UpdateVisitorController implements IController {
 			visitor.setAddress(address);
 
 			// Crear la instancia del VisitorService
-			VisitorFacade servicio = new VisitorService();
-			servicio.updateVisitorDetails(visitor);
+
+			int result = servicio.updateVisitorDetails(visitor);
+
+			if (result == 1) {
+				view = "portal.jsp";
+			}
 
 		} catch (Exception error) {
 			// Guardo en la request el mensaje de error
 			request.setAttribute("error", error.getMessage());
+			System.out.println(error.getMessage());
 		}
 
 		return view;

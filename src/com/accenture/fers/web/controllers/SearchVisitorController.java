@@ -1,6 +1,8 @@
 package com.accenture.fers.web.controllers;
 
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,13 +10,17 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 
 import com.accenture.fers.dao.EventDAO;
+import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
+import com.accenture.fers.service.EventFacade;
+import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 import com.accenture.fers.utils.IConstantes;
 
 public class SearchVisitorController implements IController {
 	VisitorFacade servicio = new VisitorService();
+	EventFacade eventService = new EventService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
@@ -35,7 +41,14 @@ public class SearchVisitorController implements IController {
 
 			// llamamos al servico para recuperar los datos del visitante
 			visitor = servicio.searchUser(visitor);
+			Set<Event> listaEventos = new HashSet<Event>();
+			Set<Event> registeredEvents = new HashSet<Event>();
 
+			registeredEvents = servicio.showRegisteredEvents(visitor);
+			listaEventos = eventService.getAllEvents();
+
+			request.getServletContext().setAttribute("lista_Eventos", listaEventos);
+			request.getServletContext().setAttribute("registeredEvents", registeredEvents);
 			// Compruebo que retorna informacion
 			if (visitor != null) {
 				view = "/WEB-INF/portal.jsp";
@@ -43,7 +56,7 @@ public class SearchVisitorController implements IController {
 			} else {
 				// agregar mensaje de error
 				request.setAttribute("error", IConstantes.ERM_024);
-				
+
 			}
 
 		} catch (Exception error) {

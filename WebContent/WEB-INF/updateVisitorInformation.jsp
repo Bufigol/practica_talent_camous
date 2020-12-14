@@ -4,6 +4,7 @@
 <meta charset="ISO-8859-1">
 <title>Welcome to Festival Event Registration System</title>
 <link rel="stylesheet" href="/css/portal.css">
+<%@ page session="true"%>
 </head>
 <body>
 
@@ -33,38 +34,38 @@
 				<tr>
 					<th style="text-align: right;">*First Name:</th>
 					<th style="text-align: left;"><input required type="text"
-						name="firstname" id="firstname" value="" maxlength=30></input></th>
+						name="firstname" id="firstname" value="${visitor.firstName}" maxlength=30></input></th>
 				</tr>
 				<tr>
 					<th style="text-align: right;">*Last Name:</th>
 					<th style="text-align: left;"><input required type="text"
-						name="lastname" id="lastname" value="" maxlength=30></input></th>
+						name="lastname" id="lastname" value="${visitor.lastName}" maxlength=30></input></th>
 				</tr>
 				<tr>
 					<th style="text-align: right;">*User Name:</th>
 					<th style="text-align: left;"><input required type="text"
-						name="username" id="username" maxlength=12 value="" disabled></input></th>
+						name="username" id="username" maxlength=12 value="${visitor.userName}" disabled></input></th>
 				</tr>
 
 				<tr>
 					<th style="text-align: right;">*Email:</th>
 					<th style="text-align: left;"><input required type="text"
-						name="email" id="email" maxlength=200 value=""></input></th>
+						name="email" id="email" maxlength=200 value="${visitor.email}"></input></th>
 				</tr>
 				<tr>
 					<th style="text-align: right;">*Dni(XX.XXX.XXX-L):</th>
 					<th style="text-align: left;"><input required type="text"
-						name="dni" id="dni" maxlength=12 value=""></input></th>
+						name="dni" id="dni" maxlength=12 value="${visitor.dni}"></input></th>
 				</tr>
 				<tr>
 					<th style="text-align: right;">*Phone Number:</th>
 					<th style="text-align: left;"><input required type="text"
-						name="phoneNumber" id="phoneNumber" maxlength=20 value=""></input></th>
+						name="phoneNumber" id="phoneNumber" maxlength=20 value="${visitor.phoneNumber}"></input></th>
 				</tr>
 				<tr>
 					<th style="text-align: right;">Address:</th>
 					<th style="text-align: left;"><input type="text"
-						name="address" id="address" maxlength=30 value=""></input></th>
+						name="address" id="address" maxlength=30 value="${visitor.address}"></input></th>
 				</tr>
 				<tr>
 					<th></th>

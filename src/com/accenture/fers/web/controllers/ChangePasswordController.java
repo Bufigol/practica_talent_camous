@@ -8,10 +8,11 @@ import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 public class ChangePasswordController implements IController {
+	VisitorFacade servicio = new VisitorService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String view = "/portal.jsp";
+		String view = "/updateVisitorPassword.jsp";
 		try {
 			// Recuperar los parametros de la request
 			String usuario = request.getParameter("visitorname");
@@ -33,6 +34,12 @@ public class ChangePasswordController implements IController {
 			// obtengo la nueva password y la actualizamos
 			String newPasword = request.getParameter("newPassword");
 			visitor.setPassword(newPasword);
+			
+			if(servicio.changePassword(visitor) == 1) {
+				request.getSession().invalidate();
+				 view = "/index.jsp";
+			}
+			
 
 		} catch (Exception error) {
 			// Guardo en la request el mensaje de error
