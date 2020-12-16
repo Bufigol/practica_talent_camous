@@ -4,11 +4,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
 import com.accenture.fers.exceptions.FERSGenericException;
 import com.accenture.fers.utils.IConstantes;
 import com.accenture.fers.utils.Validador;
@@ -36,6 +39,8 @@ public class Visitor extends People {
 	@Column(name = "password")
 	private String password;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "events_signup", joinColumns = @JoinColumn(name = "visitor_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
 	private Set<Event> registeredEvents;
 
 	public Visitor() {

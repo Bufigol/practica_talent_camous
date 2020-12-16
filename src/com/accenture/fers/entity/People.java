@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.accenture.fers.exceptions.FERSGenericException;
 import com.accenture.fers.utils.IConstantes;
 import com.accenture.fers.utils.Validador;
@@ -23,21 +25,27 @@ import com.accenture.fers.utils.Validador;
 public class People {
 
 	@Column(name = "address")
+	@Autowired
 	private String address;
 
 	@Column(name = "firstname")
+	@Autowired
 	private String firstName;
 
 	@Column(name = "lastname")
+	@Autowired
 	private String lastName;
 
 	@Column(name = "email")
+	@Autowired
 	private String email;
 
 	@Column(name = "phone_number")
+	@Autowired
 	private String phoneNumber;
 
 	@Column(name = "dni")
+	@Autowired
 	private String dni;
 
 	// Constructores

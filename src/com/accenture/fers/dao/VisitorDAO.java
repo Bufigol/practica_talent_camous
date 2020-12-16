@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.accenture.fers.entity.Visitor;
 
@@ -21,6 +22,7 @@ import com.accenture.fers.entity.Visitor;
  * 
  */
 @Repository
+@EnableTransactionManagement
 public class VisitorDAO implements IVisitorDAO {
 	@PersistenceContext
 	EntityManager emanager;
@@ -103,18 +105,20 @@ public class VisitorDAO implements IVisitorDAO {
 	 */
 	public int updateVisitor(Visitor visitor) {
 		int update = 0;
-		for (Visitor visitor2 : visitors) {
-			if (visitor2.getVisitorId() == visitor.getVisitorId()) {
-				visitor2.setAddress(visitor.getAddress());
-				visitor2.setEmail(visitor.getEmail());
-				visitor2.setFirstName(visitor.getFirstName());
-				visitor2.setLastName(visitor.getLastName());
-				visitor2.setPhoneNumber(visitor.getPhoneNumber());
-				visitor2.setDni(visitor.getDni());
-				visitor2.setPassword(visitor.getPassword());
-				visitor2.setRegisteredEvents(visitor.getRegisteredEvents());
-				update = 1;
-			}
+
+		Query queryConsulta = emanager.createNativeQuery(
+				"UPDATE visitors v SET v.id=? , v.firstname=? , v.lastname=? , v.dni=? , v.email=? , v.phonenumber=? , v.address=? , v.username=? , v.password=?");
+		queryConsulta.setParameter(1, visitor.getVisitorId());
+		queryConsulta.setParameter(2, visitor.getFirstName());
+		queryConsulta.setParameter(3, visitor.getLastName());
+		queryConsulta.setParameter(4, visitor.getDni());
+		queryConsulta.setParameter(5, visitor.getEmail());
+		queryConsulta.setParameter(6, visitor.getPhoneNumber());
+		queryConsulta.setParameter(7, visitor.getAddress());
+		queryConsulta.setParameter(8, visitor.getUserName());
+		queryConsulta.setParameter(9, visitor.getPassword());
+		if (queryConsulta.executeUpdate() > 0) {
+			update = 1;
 		}
 		return update;
 	}
