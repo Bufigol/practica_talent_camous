@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+
 import com.accenture.fers.dao.VisitorDAO;
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
@@ -15,6 +17,7 @@ import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
+@Controller("/displayView.do")
 public class DisplayViewController implements IController {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

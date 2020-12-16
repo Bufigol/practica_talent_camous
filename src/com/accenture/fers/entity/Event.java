@@ -1,5 +1,12 @@
 package com.accenture.fers.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.accenture.fers.exceptions.FERSGenericException;
 import com.accenture.fers.utils.IConstantes;
 import com.accenture.fers.utils.Validador;
@@ -14,15 +21,31 @@ import com.accenture.fers.utils.Validador;
  *
  * 
  */
-
+@Entity
+@Table(name = "events")
 public class Event {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int eventId;
+
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name="description")
 	private String description;
+	
+	@Column(name="places")
 	private String place;
+	
+	@Column(name="duration")
 	private String duration;
+	
+	@Column(name="event_type")
 	private String eventType;
+	
+	@Column(name="seats_available")
 	private int seatsAvailable;
 
 	// Constructores

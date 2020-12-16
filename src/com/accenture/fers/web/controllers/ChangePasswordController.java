@@ -9,7 +9,7 @@ import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
-@Controller
+@Controller("/changePassword.do")
 public class ChangePasswordController implements IController {
 	VisitorFacade servicio = new VisitorService();
 

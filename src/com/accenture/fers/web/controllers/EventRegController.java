@@ -5,17 +5,22 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.EventFacade;
-import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
-import com.accenture.fers.service.VisitorService;
 
+@Controller("/eventUnreg.do")
 public class EventRegController implements IController {
 
-	VisitorFacade servicio = new VisitorService();
-	EventFacade eventService = new EventService();
+	@Autowired
+	VisitorFacade servicio;
+	@Autowired
+	EventFacade eventService;
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

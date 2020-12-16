@@ -2,6 +2,13 @@ package com.accenture.fers.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.accenture.fers.exceptions.FERSGenericException;
 import com.accenture.fers.utils.IConstantes;
 import com.accenture.fers.utils.Validador;
@@ -15,13 +22,18 @@ import com.accenture.fers.utils.Validador;
  *          visitantes de la aplicación
  *
  */
-
+@Entity
+@Table(name = "visitors")
 public class Visitor extends People {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int visitorId;
 
+	@Column(name = "username")
 	private String userName;
 
+	@Column(name = "password")
 	private String password;
 
 	private Set<Event> registeredEvents;

@@ -3,6 +3,10 @@ package com.accenture.fers.dao;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.accenture.fers.entity.Visitor;
@@ -18,6 +22,8 @@ import com.accenture.fers.entity.Visitor;
  */
 @Repository
 public class VisitorDAO implements IVisitorDAO {
+	@PersistenceContext
+	EntityManager emanager;
 
 	private static Set<Visitor> visitors = new HashSet<Visitor>();
 	private static int lastID = 4;
@@ -123,11 +129,9 @@ public class VisitorDAO implements IVisitorDAO {
 	 */
 	public Visitor findByUserName(String userName) {
 		Visitor visitorFound = null;
-		for (Visitor visitorF : visitors) {
-			if (visitorF.getUserName().equals(userName)) {
-				visitorFound = visitorF;
-			}
-		}
+		Query queryConsulta = emanager.createQuery("SELECT v FROM Visitor v WHERE v.username=?1");
+		queryConsulta.setParameter(1, userName);
+		visitorFound = (Visitor) queryConsulta.getSingleResult();
 		return visitorFound;
 	}
 }

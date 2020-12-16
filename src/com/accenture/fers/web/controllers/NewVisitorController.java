@@ -1,11 +1,16 @@
 package com.accenture.fers.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
+@Controller("/newVisitor.do")
 public class NewVisitorController implements IController {
 
 	@Override

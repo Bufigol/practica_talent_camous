@@ -1,26 +1,29 @@
 package com.accenture.fers.web.controllers;
 
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspWriter;
 
-import com.accenture.fers.dao.EventDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.EventFacade;
-import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
-import com.accenture.fers.service.VisitorService;
 import com.accenture.fers.utils.IConstantes;
 
+@Controller("/searchVisitor.do")
 public class SearchVisitorController implements IController {
-	VisitorFacade servicio = new VisitorService();
-	EventFacade eventService = new EventService();
+
+	@Autowired
+	VisitorFacade servicio;
+
+	@Autowired
+	EventFacade eventService;
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

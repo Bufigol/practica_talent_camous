@@ -1,5 +1,10 @@
 package com.accenture.fers.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+
 import com.accenture.fers.exceptions.FERSGenericException;
 import com.accenture.fers.utils.IConstantes;
 import com.accenture.fers.utils.Validador;
@@ -13,14 +18,26 @@ import com.accenture.fers.utils.Validador;
  *          restrictions on its parameters have been added.
  *
  */
-
+@MappedSuperclass
+@Table(name = "visitors")
 public class People {
 
+	@Column(name = "address")
 	private String address;
+
+	@Column(name = "firstname")
 	private String firstName;
+
+	@Column(name = "lastname")
 	private String lastName;
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "phone_number")
 	private String phoneNumber;
+
+	@Column(name = "dni")
 	private String dni;
 
 	// Constructores

@@ -3,12 +3,16 @@ package com.accenture.fers.web.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
-import com.accenture.fers.service.VisitorService;
 
+@Controller("/updateVisitor.do")
 public class UpdateVisitorController implements IController {
-	VisitorFacade servicio = new VisitorService();
+
+	@Autowired
+	VisitorFacade servicio;
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
