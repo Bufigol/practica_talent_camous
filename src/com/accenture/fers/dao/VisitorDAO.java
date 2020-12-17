@@ -73,8 +73,8 @@ public class VisitorDAO implements IVisitorDAO {
 	@Override
 	public Visitor findByUserName(String userName) {
 		Visitor visitorFound = null;
-		Query queryConsulta = emanager.createQuery("SELECT v FROM Visitor v WHERE v.username=?1");
-		queryConsulta.setParameter(1, userName);
+		String consulta = "SELECT v FROM Visitor v WHERE v.userName = " + userName;
+		Query queryConsulta = emanager.createQuery(consulta);
 		visitorFound = (Visitor) queryConsulta.getSingleResult();
 		return visitorFound;
 	}
