@@ -28,7 +28,7 @@
 		<!-- cambiar la base de datos, hay que anadir un 2 -->
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/festivaldb2" />
-		<property name="username" value="eclipse" />
+		<property name="username" value="root" />
 		<property name="password" value="1234abcd" />
 	</bean>
 
@@ -59,7 +59,7 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
-		<property ref="entityManagerFactory"
+		<property ref="emanager"
 			name="entityManagerFactory" />
 	</bean>
 
