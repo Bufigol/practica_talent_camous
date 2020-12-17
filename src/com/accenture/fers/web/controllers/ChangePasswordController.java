@@ -7,15 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
+import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 @Controller("/changePassword.do")
-public class ChangePasswordController implements IController{
-	
+public class ChangePasswordController implements IController {
 	@Autowired
-	VisitorService servicio;
+	VisitorFacade servicio;
 
-	
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/updateVisitorPassword.jsp");
 		try {
@@ -29,8 +28,6 @@ public class ChangePasswordController implements IController{
 			// Asignamos valores a esta instancia
 			visitor.setUserName(usuario);
 			visitor.setPassword(password);
-
-			
 
 			// llamamos al servico para recuperar los datos del visitante
 			visitor = servicio.searchUser(visitor);

@@ -1,8 +1,10 @@
 package com.accenture.fers.dao;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,12 +27,13 @@ import com.accenture.fers.entity.Event;
  * @version 2.0
  */
 @Repository
-@EnableTransactionManagement
-public class EventDAO {
+public class EventDAO implements IEventDAO {
 
 	@PersistenceContext
 	@Autowired
 	EntityManager emanager;
+	@Autowired
+	IEventDAO eventDAO;
 
 	private int lastID;
 
@@ -46,18 +49,15 @@ public class EventDAO {
 	 * 
 	 */
 	public Set<Event> findAll() {
+		Set<Event> events = null;
+		Query queryConsulta = emanager.createQuery("SELECT e FROM Event e");
+		Collection<Event> listevents = queryConsulta.getResultList();
+		events = listevents.stream().collect(Collectors.toSet());
 
 		this.lastID = 0;
-		Query queryConsulta = emanager.createQuery("SELECT e FROM Event e");
-		List<Event> eventos = queryConsulta.getResultList();
 
-		Set<Event> events = Collections.emptySet();
-
-		for (Event event : eventos) {
-			events.add(event);
-			this.lastID++;
-		}
-		return events;
+		this.lastID = events.size() + 1;
+		return (Set<Event>) events;
 	}
 
 	/**
@@ -87,20 +87,7 @@ public class EventDAO {
 
 	@Transactional
 	public void save(Event myEvent) {
-		Query queryConsulta = emanager.createNativeQuery(
-				"INSERT INTO events(id,name,description,places,duration,event_type,seats_available) VALUES (? , ? , ? , ? , ? , ? , ?)");
-		if (myEvent.getEventId() <= this.lastID) {
-			this.lastID = this.lastID + 1;
-			myEvent.setEventId(this.lastID);
-		}
-		queryConsulta.setParameter(1, myEvent.getEventId());
-		queryConsulta.setParameter(2, myEvent.getName());
-		queryConsulta.setParameter(3, myEvent.getDescription());
-		queryConsulta.setParameter(4, myEvent.getPlace());
-		queryConsulta.setParameter(5, myEvent.getDuration());
-		queryConsulta.setParameter(6, myEvent.getEventType());
-		queryConsulta.setParameter(7, myEvent.getSeatsAvailable());
-		queryConsulta.executeUpdate();
+		emanager.merge(myEvent);
 	}
 
 }

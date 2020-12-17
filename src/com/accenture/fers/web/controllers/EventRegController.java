@@ -12,17 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
-import com.accenture.fers.service.EventService;
-import com.accenture.fers.service.VisitorService;
+import com.accenture.fers.service.EventFacade;
+import com.accenture.fers.service.VisitorFacade;
 
 @Controller("/eventUnreg.do")
-public class EventRegController implements IController{
+public class EventRegController implements IController {
 
 	@Autowired
-	VisitorService servicio;
+	VisitorFacade servicio;
 
 	@Autowired
-	EventService eventService;
+	EventFacade eventService;
 
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/WEB-INF/portal.jsp");

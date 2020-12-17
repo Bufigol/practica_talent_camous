@@ -12,31 +12,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.accenture.fers.dao.IVisitorDAO;
 import com.accenture.fers.dao.VisitorDAO;
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
+import com.accenture.fers.service.EventFacade;
 import com.accenture.fers.service.EventService;
-import com.accenture.fers.service.VisitorService;
+import com.accenture.fers.service.VisitorFacade;
 
 @Controller("/displayView.do")
-public class DisplayViewController implements IController{
+public class DisplayViewController implements IController {
 
 	@Autowired
-	VisitorService servicio;
-
+	VisitorFacade servicio;
 
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/WEB-INF/portal.jsp");
 		try {
 			String usuario = request.getParameter("visitorname");
-			VisitorDAO visitDAO = new VisitorDAO();
+			IVisitorDAO visitDAO = new VisitorDAO();
 
 			// Crear una instancia del objeto Visitor
 			Visitor visitor = visitDAO.findByUserName(usuario);
 
 			Set<Event> registedEvents = servicio.showRegisteredEvents(visitor);
 			request.setAttribute("registedEvents", registedEvents);
-			EventService eventService = new EventService();
+			EventFacade eventService = new EventService();
 			Set<Event> allEvents = eventService.getAllEvents();
 			request.setAttribute("allEvents", allEvents);
 		} catch (Exception error) {

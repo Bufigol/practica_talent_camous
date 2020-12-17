@@ -8,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
+import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 @Controller("/updateVisitor.do")
 public class UpdateVisitorController implements IController {
 
 	@Autowired
-	VisitorService servicio;
+	VisitorFacade servicio;
 
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		// Creamos la variable de retorno

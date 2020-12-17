@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/com/accenture/fers/dao/IVisitorDAO.java=UTF-8
+encoding//src/com/accenture/fers/dao/VisitorDAO.java=UTF-8
 encoding//src/com/accenture/fers/test/entity/EventTest.java=UTF-8

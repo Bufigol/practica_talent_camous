@@ -4,9 +4,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.accenture.fers.dao.EventDAO;
-import com.accenture.fers.dao.VisitorDAO;
+import com.accenture.fers.dao.IEventDAO;
+import com.accenture.fers.dao.IVisitorDAO;
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.exceptions.FERSGenericException;
@@ -20,13 +22,14 @@ import com.accenture.fers.exceptions.FERSGenericException;
  * @version 1.0
  */
 @Service("visitorService")
+@EnableTransactionManagement
 public class VisitorService implements VisitorFacade {
 
 	@Autowired
-	private VisitorDAO visitorDAO;
+	private IVisitorDAO visitorDAO;
 
 	@Autowired
-	private EventDAO eventDAO;
+	private IEventDAO eventDAO;
 
 	/**
 	 * 

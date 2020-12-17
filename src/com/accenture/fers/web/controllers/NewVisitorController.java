@@ -9,12 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
-import com.accenture.fers.service.VisitorService;
+import com.accenture.fers.service.VisitorFacade;
 
 @Controller("/newVisitor.do")
 public class NewVisitorController implements IController {
 	@Autowired
-	VisitorService servicio;
+	VisitorFacade servicio;
 
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/index.jsp");

@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.EventService;
-import com.accenture.fers.service.VisitorService;
+import com.accenture.fers.service.VisitorFacade;
 
 @Controller("/eventUnreg.do")
-public class EventUnregController implements IController{
-
+public class EventUnregController implements IController {
 	@Autowired
-	VisitorService servicio;
+	VisitorFacade servicio;
+
 	@Autowired
 	EventService eventService;
 
