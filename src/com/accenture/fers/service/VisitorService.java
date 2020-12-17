@@ -20,7 +20,7 @@ import com.accenture.fers.exceptions.FERSGenericException;
  * @version 1.0
  */
 @Service("visitorService")
-public class VisitorService {
+public class VisitorService implements VisitorFacade {
 
 	@Autowired
 	private VisitorDAO visitorDAO;

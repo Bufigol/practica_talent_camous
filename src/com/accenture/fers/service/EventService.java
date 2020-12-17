@@ -18,9 +18,8 @@ import com.accenture.fers.entity.Event;
  *
  */
 @Service("eventService")
-public class EventService {
-	
-	
+public class EventService implements EventFacade {
+
 	EventDAO eventDAO = new EventDAO();
 
 	public EventService() {
