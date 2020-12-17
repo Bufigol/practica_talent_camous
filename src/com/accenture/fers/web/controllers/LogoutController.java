@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller("/logoutController.do")
+@Controller
 public class LogoutController extends HttpServlet implements IController {
 	@RequestMapping("/logoutController.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {

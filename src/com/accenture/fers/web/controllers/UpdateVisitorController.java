@@ -12,7 +12,7 @@ import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
-@Controller("/updateVisitor.do")
+@Controller
 public class UpdateVisitorController implements IController {
 
 	@Autowired

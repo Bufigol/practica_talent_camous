@@ -19,7 +19,7 @@ import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 import com.accenture.fers.utils.IConstantes;
 
-@Controller("/searchVisitor.do")
+@Controller
 public class SearchVisitorController implements IController {
 
 	@Autowired

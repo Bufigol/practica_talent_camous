@@ -11,7 +11,7 @@ import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
-@Controller("/changePassword.do")
+@Controller
 public class ChangePasswordController implements IController {
 	@Autowired
 	VisitorFacade servicio;

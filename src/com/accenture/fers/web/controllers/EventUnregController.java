@@ -17,15 +17,17 @@ import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
 
-@Controller("/eventUnreg.do")
+@Controller
 public class EventUnregController implements IController {
-	@Autowired
-	VisitorFacade servicio;
+    @Autowired
+    VisitorFacade servicio;
 
-	@Autowired
-	EventService eventService;
-	
-	@RequestMapping("/eventUnreg.do")
+ 
+
+    @Autowired
+    EventService eventService;
+    
+    @RequestMapping("/eventUnreg.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/WEB-INF/portal.jsp");
 		try {

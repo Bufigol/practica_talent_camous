@@ -59,7 +59,7 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
-		<property ref="emanager"
+		<property ref="entityManagerFactory"
 			name="entityManagerFactory" />
 	</bean>
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.VisitorFacade;
 
-@Controller("/newVisitor.do")
+@Controller
 public class NewVisitorController implements IController {
 	@Autowired
 	VisitorFacade servicio;

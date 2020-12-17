@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.accenture.fers.dao.EventDAO;
+import com.accenture.fers.dao.IEventDAO;
 import com.accenture.fers.entity.Event;
 
 /**
@@ -23,7 +24,7 @@ import com.accenture.fers.entity.Event;
 public class EventService implements EventFacade {
 
 	@Autowired
-	EventDAO eventDAO;
+	IEventDAO eventDAO;
 
 	public EventService() {
 

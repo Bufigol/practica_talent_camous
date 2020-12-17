@@ -16,7 +16,7 @@ import com.accenture.fers.entity.Visitor;
 import com.accenture.fers.service.EventFacade;
 import com.accenture.fers.service.VisitorFacade;
 
-@Controller("/eventUnreg.do")
+@Controller
 public class EventRegController implements IController {
 
 	@Autowired

@@ -21,7 +21,7 @@ import com.accenture.fers.service.EventFacade;
 import com.accenture.fers.service.EventService;
 import com.accenture.fers.service.VisitorFacade;
 
-@Controller("/displayView.do")
+@Controller
 public class DisplayViewController implements IController {
 
 	@Autowired
