@@ -2,20 +2,22 @@ package com.accenture.fers.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
-import com.accenture.fers.service.VisitorFacade;
 import com.accenture.fers.service.VisitorService;
 
 @Controller("/changePassword.do")
-public class ChangePasswordController implements IController {
-	VisitorFacade servicio = new VisitorService();
+public class ChangePasswordController implements IController{
+	
+	@Autowired
+	VisitorService servicio;
 
-	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String view = "/updateVisitorPassword.jsp";
+	
+	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("/updateVisitorPassword.jsp");
 		try {
 			// Recuperar los parametros de la request
 			String usuario = request.getParameter("visitorname");
@@ -28,8 +30,7 @@ public class ChangePasswordController implements IController {
 			visitor.setUserName(usuario);
 			visitor.setPassword(password);
 
-			// Crear la instancia del VisitorService
-			VisitorFacade servicio = new VisitorService();
+			
 
 			// llamamos al servico para recuperar los datos del visitante
 			visitor = servicio.searchUser(visitor);
@@ -40,7 +41,7 @@ public class ChangePasswordController implements IController {
 
 			if (servicio.changePassword(visitor) == 1) {
 				request.getSession().invalidate();
-				view = "/index.jsp";
+				view.setViewName("/index.jsp");
 			}
 
 		} catch (Exception error) {

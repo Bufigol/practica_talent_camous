@@ -2,11 +2,10 @@ package com.accenture.fers.service;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accenture.fers.dao.EventDAO;
-import com.accenture.fers.dao.IEventDAO;
-import com.accenture.fers.dao.IVisitorDAO;
 import com.accenture.fers.dao.VisitorDAO;
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
@@ -21,11 +20,13 @@ import com.accenture.fers.exceptions.FERSGenericException;
  * @version 1.0
  */
 @Service("visitorService")
-public class VisitorService implements VisitorFacade {
+public class VisitorService {
 
-	private IVisitorDAO visitorDAO = new VisitorDAO();
+	@Autowired
+	private VisitorDAO visitorDAO;
 
-	private IEventDAO eventDAO = new EventDAO();
+	@Autowired
+	private EventDAO eventDAO;
 
 	/**
 	 * 

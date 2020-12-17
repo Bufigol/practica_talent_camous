@@ -2,34 +2,39 @@ package com.accenture.fers.service;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accenture.fers.dao.EventDAO;
-import com.accenture.fers.dao.IEventDAO;
 import com.accenture.fers.entity.Event;
 
 /**
-*
-* Implementación de EventService
-*
-* @author Tecnilógica
-*
-* @version 1.1
-*
-*/
+ *
+ * Implementación de EventService
+ *
+ * @author Tecnilógica
+ *
+ * @version 1.1
+ *
+ */
 @Service("eventService")
-public class EventService implements EventFacade{
+public class EventService {
+	
+	
+	EventDAO eventDAO = new EventDAO();
 
-	IEventDAO eventDAO = new EventDAO();
+	public EventService() {
+
+	}
 
 	/**
-	 *  Servicio que devuelve la lista completa de eventos
+	 * Servicio que devuelve la lista completa de eventos
 	 *
 	 * @return Colección con todos los eventos
 	 *
 	 */
 	public Set<Event> getAllEvents() {
-		//Devuelve todos los eventos
+		// Devuelve todos los eventos
 		return eventDAO.findAll();
 	}
 

@@ -1,59 +1,73 @@
 package com.accenture.fers.web.listeners;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.accenture.fers.entity.Event;
-import com.accenture.fers.service.EventFacade;
 import com.accenture.fers.service.EventService;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 /**
- * EventListener es una implementación de la clase ServletContextListener En la
- * inicialización cargaremos la lista de todos los eventos de la aplicación
+ * Application Lifecycle Listener implementation class Listener Clase que
+ * determina qué ocurre cuando el Servlet se destruye o se crea, recuperándose
+ * en este último caso los eventos que se guardarán en el Servlet Context para
+ * poder ser usados por la aplicación
  *
  */
-@WebListener
+@WebListener // Anotación para configurar el listener
 public class EventListener implements ServletContextListener {
 
 	/**
-	 * Contructor por defecto o vacío
+	 * Default constructor (constructor vacío)
 	 */
 	public EventListener() {
 
 	}
 
 	/**
-	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
+	 * @see ServletContextListener#contextDestroyed(ServletContextEvent) En este
+	 *      método se pone lo que se quiere que haga cuando se destruye el servlet
+	 * 
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
 
 	}
 
 	/**
-	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
+	 * @see ServletContextListener#contextInitialized(ServletContextEvent) En este
+	 *      método se indica lo que se quiere que haga cuando el servlet se crea o
+	 *      inicializa
+	 *
+	 *      Cuando se crea el servlet se recuperan todos los eventos y se guardan en
+	 *      el Servlet Context para usarlos en la aplicación
 	 */
-	public void contextInitialized(ServletContextEvent event) {
-		/*
-		 * Quiero que coja todos los elementos de EventDAO, los guarde en una lista y la
-		 * meta en un ServletContext para tenerla accesible en el Portal.jsp Se usa con
-		 * todos las variables que pertenezcan al ApplicatioScope Sólo hay 1
-		 * ServletContext por aplicación. Se crea antes de que arranque la misma. Una
-		 * vez creado será utilizado por todos los servlets y jsps de la aplicación.
-		 */
 
-		// Me creo lista para albergar todos los eventos globales
-		Set<Event> listaEventos = new HashSet<Event>();
-		EventFacade eventService = new EventService();
+	// Por standar de Java y de JPA, es necesario utilizar la interface para crear
+	// la bean
+	@Autowired
+	EventService eventService;
 
-		// Relleno la lista usando el servicio
-		listaEventos = eventService.getAllEvents();
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-		// Los meto en el ServletContext
-		event.getServletContext().setAttribute("lista_Eventos", listaEventos);
+		// Se crea el contendor ApplicationContext (que maneja las Beans) para poder
+		// recuperar la bean de eventService
+		ApplicationContext ac = WebApplicationContextUtils
+				.getWebApplicationContext(servletContextEvent.getServletContext());
+
+		eventService = (EventService) ac.getBean("eventService");
+
+		// Se recuperan todos los eventos con el método getAllEvents del EventService
+		Set<Event> listaEventos = eventService.getAllEvents();
+
+		// Coger esa lista de eventos y garadarla en el ServletContext
+		servletContextEvent.getServletContext().setAttribute("listaEventos", listaEventos);
+
 	}
-
 }

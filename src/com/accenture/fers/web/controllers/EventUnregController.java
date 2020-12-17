@@ -9,23 +9,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
-import com.accenture.fers.service.EventFacade;
-import com.accenture.fers.service.VisitorFacade;
+import com.accenture.fers.service.EventService;
+import com.accenture.fers.service.VisitorService;
 
 @Controller("/eventUnreg.do")
-public class EventUnregController implements IController {
+public class EventUnregController implements IController{
 
 	@Autowired
-	VisitorFacade servicio;
+	VisitorService servicio;
 	@Autowired
-	EventFacade eventService;
+	EventService eventService;
 
-	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String view = "/WEB-INF/portal.jsp";
+	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("/WEB-INF/portal.jsp");
 		try {
 			// Recuperar los parametros de la request
 

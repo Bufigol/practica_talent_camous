@@ -9,45 +9,60 @@
 
 	<!-- Configurar el uso de anotaciones -->
 	<context:annotation-config></context:annotation-config>
-	
-	<!-- Configurar el uso de autodiscovery - Indicamos la ruta donde se encuentran las clases que seran nuestros Beans -->
-	<context:component-scan base-package="com.accenture.fers"></context:component-scan>
-		
-   <!-- para activar las anotaciones de JPA, es decir hibernate -->
-   <tx:annotation-driven transaction-manager = "transactionManager"/>
-   
-   <!-- configuracion el acceso a la base de datos que es la persistencia -->
-   
-	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<!--  cambiar la base de datos, hay que anadir un 2 -->
-		<property name="url" value="jdbc:mysql://localhost:3306/festivaldb2"/>
-		<property name="username" value="eclipse"/>
-		<property name="password" value="1234abcd"/>
+
+	<!-- Configurar el uso de autodiscovery - Indicamos la ruta donde se encuentran 
+		las clases que seran nuestros Beans -->
+	<context:component-scan
+		base-package="com.accenture.fers"></context:component-scan>
+
+	<!-- para activar las anotaciones de JPA, es decir hibernate -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<!-- configuracion el acceso a la base de datos que es la persistencia -->
+
+	<bean class="org.apache.commons.dbcp.BasicDataSource"
+		id="dataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<!-- cambiar la base de datos, hay que anadir un 2 -->
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/festivaldb2" />
+		<property name="username" value="eclipse" />
+		<property name="password" value="1234abcd" />
 	</bean>
 
 	<!-- establece la conexion a base y se le inyecta la fuente de datos dataSource -->
-	
-	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
-		<property ref="dataSource" name="dataSource"/>
-		<property name="persistenceUnitName" value="SpringPractica1111"/>
-		<property name="packagesToScan" value="es.tecnilogica.ejemplos.spring.entities"/>
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
+		<property ref="dataSource" name="dataSource" />
+		<property name="persistenceUnitName"
+			value="SpringPractica1111" />
+		<property name="packagesToScan"
+			value="com.accenture.fers.entity" />
 		<property name="jpaVendorAdapter">
-		<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-			<property name="showSql" value="true"/>
-			<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
-		</bean>
-  		</property>
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="databasePlatform"
+					value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
 	</bean>
-	
-	
-	<!--  crea la entityManager, el factory y donde tiene que buscar los objetos que van a ser mapeados y 
-													se le inyecta la especificación del entityManagerFactory-->
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
-	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
-		<property ref="entityManagerFactory" name="entityManagerFactory"/>
+
+
+	<!-- crea la entityManager, el factory y donde tiene que buscar los objetos 
+		que van a ser mapeados y se le inyecta la especificación del entityManagerFactory -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property ref="entityManagerFactory"
+			name="entityManagerFactory" />
 	</bean>
-	
-	
+
+
 
 </beans>

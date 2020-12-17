@@ -36,23 +36,18 @@ public class Event {
 	private int eventId;
 
 	@Column(name = "name")
-	@Autowired
 	private String name;
 
 	@Column(name = "description")
-	@Autowired
 	private String description;
 
 	@Column(name = "places")
-	@Autowired
 	private String place;
 
 	@Column(name = "duration")
-	@Autowired
 	private String duration;
 
 	@Column(name = "event_type")
-	@Autowired
 	private String eventType;
 
 	@Column(name = "seats_available")

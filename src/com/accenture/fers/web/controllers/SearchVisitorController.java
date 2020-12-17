@@ -9,25 +9,25 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Event;
 import com.accenture.fers.entity.Visitor;
-import com.accenture.fers.service.EventFacade;
-import com.accenture.fers.service.VisitorFacade;
+import com.accenture.fers.service.EventService;
+import com.accenture.fers.service.VisitorService;
 import com.accenture.fers.utils.IConstantes;
 
 @Controller("/searchVisitor.do")
 public class SearchVisitorController implements IController {
 
 	@Autowired
-	VisitorFacade servicio;
+	VisitorService servicio;
 
 	@Autowired
-	EventFacade eventService;
+	EventService eventService;
 
-	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
-		String view = "index.jsp";
+	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("index.jsp");
 		try {
 			// Creamos la variable de retorno
 			HttpSession sesion = request.getSession();
@@ -54,7 +54,7 @@ public class SearchVisitorController implements IController {
 			request.getServletContext().setAttribute("registeredEvents", registeredEvents);
 			// Compruebo que retorna informacion
 			if (visitor != null) {
-				view = "/WEB-INF/portal.jsp";
+				view.setViewName("/WEB-INF/portal.jsp");
 				sesion.setAttribute("visitor", visitor);
 			} else {
 				// agregar mensaje de error

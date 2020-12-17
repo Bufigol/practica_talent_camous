@@ -1,5 +1,6 @@
 package com.accenture.fers.dao;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -25,14 +26,16 @@ import com.accenture.fers.entity.Event;
  */
 @Repository
 @EnableTransactionManagement
-public class EventDAO implements IEventDAO {
+public class EventDAO {
+
 	@PersistenceContext
+	@Autowired
 	EntityManager emanager;
 
-	private static Set<Event> events;
 	private int lastID;
 
 	public EventDAO() {
+
 	}
 
 	/**
@@ -43,15 +46,18 @@ public class EventDAO implements IEventDAO {
 	 * 
 	 */
 	public Set<Event> findAll() {
-		EventDAO.events.clear();
+
 		this.lastID = 0;
 		Query queryConsulta = emanager.createQuery("SELECT e FROM Event e");
 		List<Event> eventos = queryConsulta.getResultList();
+
+		Set<Event> events = Collections.emptySet();
+
 		for (Event event : eventos) {
-			EventDAO.events.add(event);
+			events.add(event);
 			this.lastID++;
 		}
-		return EventDAO.events;
+		return events;
 	}
 
 	/**
@@ -63,6 +69,7 @@ public class EventDAO implements IEventDAO {
 	 */
 	public Event findOne(int eventId) {
 		Event eventFound = null;
+
 		Query queryConsulta = emanager.createQuery("SELECT e FROM Event e WHERE e.id=?1");
 		queryConsulta.setParameter(1, eventId);
 		List<Event> resultados = queryConsulta.getResultList();

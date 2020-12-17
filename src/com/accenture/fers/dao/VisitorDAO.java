@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -23,8 +24,9 @@ import com.accenture.fers.entity.Visitor;
  */
 @Repository
 @EnableTransactionManagement
-public class VisitorDAO implements IVisitorDAO {
+public class VisitorDAO {
 	@PersistenceContext
+	@Autowired
 	EntityManager emanager;
 
 	private static Set<Visitor> visitors = new HashSet<Visitor>();
@@ -104,22 +106,14 @@ public class VisitorDAO implements IVisitorDAO {
 	 * 
 	 */
 	public int updateVisitor(Visitor visitor) {
-		int update = 0;
-
-		Query queryConsulta = emanager.createNativeQuery(
-				"UPDATE visitors v SET v.id=? , v.firstname=? , v.lastname=? , v.dni=? , v.email=? , v.phonenumber=? , v.address=? , v.username=? , v.password=?");
-		queryConsulta.setParameter(1, visitor.getVisitorId());
-		queryConsulta.setParameter(2, visitor.getFirstName());
-		queryConsulta.setParameter(3, visitor.getLastName());
-		queryConsulta.setParameter(4, visitor.getDni());
-		queryConsulta.setParameter(5, visitor.getEmail());
-		queryConsulta.setParameter(6, visitor.getPhoneNumber());
-		queryConsulta.setParameter(7, visitor.getAddress());
-		queryConsulta.setParameter(8, visitor.getUserName());
-		queryConsulta.setParameter(9, visitor.getPassword());
-		if (queryConsulta.executeUpdate() > 0) {
+		int update;
+		try {
+			emanager.merge(visitor);
 			update = 1;
+		} catch (Exception e) {
+			update = 0;
 		}
+
 		return update;
 	}
 
