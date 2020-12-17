@@ -30,13 +30,9 @@ import com.accenture.fers.entity.Event;
 public class EventDAO implements IEventDAO {
 
 	@PersistenceContext
-	@Autowired
 	EntityManager emanager;
-	@Autowired
-	IEventDAO eventDAO;
 
-	private int lastID;
-
+	
 	public EventDAO() {
 
 	}
@@ -53,11 +49,7 @@ public class EventDAO implements IEventDAO {
 		Query queryConsulta = emanager.createQuery("SELECT e FROM Event e");
 		Collection<Event> listevents = queryConsulta.getResultList();
 		events = listevents.stream().collect(Collectors.toSet());
-
-		this.lastID = 0;
-
-		this.lastID = events.size() + 1;
-		return (Set<Event>) events;
+		return events;
 	}
 
 	/**

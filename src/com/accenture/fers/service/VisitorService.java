@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.accenture.fers.dao.EventDAO;
 import com.accenture.fers.dao.IEventDAO;
@@ -39,6 +40,7 @@ public class VisitorService implements VisitorFacade {
 	 * @return boolean
 	 * 
 	 */
+	@Transactional
 	public boolean createVisitor(Visitor visitor) {
 		boolean flag = false;
 
@@ -60,6 +62,7 @@ public class VisitorService implements VisitorFacade {
 	 * @param visitor (username)
 	 * @return visitor encontrado o null si no lo encuentra
 	 */
+	
 	public Visitor searchUser(Visitor visitor) {
 		// Busca el visitor por userName
 		Visitor visitorFound = visitorDAO.findByUserName(visitor.getUserName());
@@ -83,6 +86,7 @@ public class VisitorService implements VisitorFacade {
 	 * @param eventId
 	 * 
 	 */
+	@Transactional
 	public void registerVisitorToEvent(Visitor visitor, int eventId) {
 		// Buscamos evento por su eventId
 		Event event = eventDAO.findOne(eventId);
@@ -140,6 +144,7 @@ public class VisitorService implements VisitorFacade {
 	 * @return int --> 1 si se actualizó correctamente, 0 si no
 	 * 
 	 */
+	@Transactional
 	public int updateVisitorDetails(Visitor visitor) {
 		// actualiza los datos del visitor
 		return visitorDAO.updateVisitor(visitor);
@@ -153,6 +158,7 @@ public class VisitorService implements VisitorFacade {
 	 * @return int --> 1 si se actualizó correctamente, 0 si no
 	 * 
 	 */
+	@Transactional
 	public int changePassword(Visitor visitor) {
 		// actualiza la password
 		return visitorDAO.updateVisitor(visitor);

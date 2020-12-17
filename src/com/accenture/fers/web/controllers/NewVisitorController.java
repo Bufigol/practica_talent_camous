@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
@@ -15,7 +16,8 @@ import com.accenture.fers.service.VisitorFacade;
 public class NewVisitorController implements IController {
 	@Autowired
 	VisitorFacade servicio;
-
+	
+	@RequestMapping("/newVisitor.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("/index.jsp");
 		try {

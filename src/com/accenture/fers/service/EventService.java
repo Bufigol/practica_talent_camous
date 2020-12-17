@@ -22,7 +22,8 @@ import com.accenture.fers.entity.Event;
 @EnableTransactionManagement 
 public class EventService implements EventFacade {
 
-	EventDAO eventDAO = new EventDAO();
+	@Autowired
+	EventDAO eventDAO;
 
 	public EventService() {
 

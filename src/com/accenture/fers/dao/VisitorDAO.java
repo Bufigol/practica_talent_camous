@@ -25,11 +25,7 @@ import com.accenture.fers.entity.Visitor;
 @Repository
 public class VisitorDAO implements IVisitorDAO {
 	@PersistenceContext
-	@Autowired
 	EntityManager emanager;
-
-	private static Set<Visitor> visitors = new HashSet<Visitor>();
-	private static int lastID = 4;
 
 	public VisitorDAO() {
 
@@ -43,8 +39,6 @@ public class VisitorDAO implements IVisitorDAO {
 	 */
 	@Override
 	public void save(Visitor visitor) {
-		lastID++;
-		visitor.setVisitorId(lastID);
 		emanager.persist(visitor);
 
 	}

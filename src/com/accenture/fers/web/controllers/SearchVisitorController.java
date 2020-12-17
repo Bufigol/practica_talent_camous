@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Event;
@@ -27,6 +28,7 @@ public class SearchVisitorController implements IController {
 	@Autowired
 	EventService eventService;
 
+	@RequestMapping("/searchVisitor.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("index.jsp");
 		try {

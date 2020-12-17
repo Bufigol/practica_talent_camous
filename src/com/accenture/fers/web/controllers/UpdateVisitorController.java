@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.accenture.fers.entity.Visitor;
@@ -17,6 +18,7 @@ public class UpdateVisitorController implements IController {
 	@Autowired
 	VisitorFacade servicio;
 
+	@RequestMapping("/updateVisitor.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
 		// Creamos la variable de retorno
 		ModelAndView view = new ModelAndView("WEB-INF/updateVisitorInformation.jsp");

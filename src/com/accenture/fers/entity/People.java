@@ -21,31 +21,24 @@ import com.accenture.fers.utils.Validador;
  *
  */
 @MappedSuperclass
-@Table(name = "visitors")
 public class People {
 
 	@Column(name = "address")
-	@Autowired
 	private String address;
 
 	@Column(name = "firstname")
-	@Autowired
 	private String firstName;
 
 	@Column(name = "lastname")
-	@Autowired
 	private String lastName;
 
 	@Column(name = "email")
-	@Autowired
 	private String email;
 
 	@Column(name = "phone_number")
-	@Autowired
 	private String phoneNumber;
 
 	@Column(name = "dni")
-	@Autowired
 	private String dni;
 
 	// Constructores
